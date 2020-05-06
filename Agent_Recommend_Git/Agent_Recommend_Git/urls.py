@@ -21,4 +21,7 @@ from Agent_Recommend_Git import views
 urlpatterns = [
     path('admin/', admin.site.urls),
 path('', views.home),
+path('wenjuan/', views.wenjuan),
+path('recommend_result/', views.recommend_result),
+
 ]
