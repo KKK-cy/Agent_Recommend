@@ -101,27 +101,32 @@
         <div class="container">
 
             <div class="row">
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-                             xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false"
-                             role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title>
-                            <rect width="100%" height="100%" fill="#55595c"/>
-                            <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                        </svg>
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-muted">9 mins</small>
+                {% for agent_info in agent_infos %}
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <img src="{{ agent_info.agent_img }}" alt="" height="350px">
+                            <div class="card-body">
+                                <h5 class="card-title"><b style="color: red">{{ agent_info.agent_name }}</b></h5>
+
+                                <h7>服务年限：<b>{{ agent_info.service_year }}</b>年</h7>
+                                <h7>关注人数：<b>{{ agent_info.followers_number }}</b>人</h7>
+                                </br>
+                                <h7>平均每年买卖房屋成交量：<b>{{ agent_info.sales_num_every_year }}</b>套/年&nbsp</h7>
+                                </br>
+                                <h7>平均每年租赁房屋成交量：<b>{{ agent_info.rent_num_every_year }}</b>套/年&nbsp</h7>
+                                </br>
+                                <h7>近30天买卖带看房次数：<b>{{ agent_info.kanfang_number_30_days }}</b>次&nbsp;&nbsp;&nbsp;&nbsp;</h7>
+                                </br>
+                                <h7>累计评论条数：<b>{{ agent_info.comments_number }}</b>条</h7>
+                                </br>
+                                <h7>联系方式：<b style="color: red">{{ agent_info.phone_number }}</b></h7>
+
+                                <a href="{{ agent_info.agent_url }}" target="-blank"
+                                   class="btn btn-primary">访问{{ agent_info.agent_name }}的主页获取更多详细信息</a>
                             </div>
                         </div>
                     </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>

@@ -22,6 +22,8 @@ class Agents_other_info(models.Model):
     comments_number = models.IntegerField(default='评论条数')
 
     phone_number = models.CharField(default='电话号码', max_length=60)
+    agent_img = models.CharField(default='中介图片', max_length=60)
+
 
     sales_num_every_year = models.FloatField(default='平均每年卖房数量')
     rent_num_every_year = models.FloatField(default='平均每年租赁房屋数量')
