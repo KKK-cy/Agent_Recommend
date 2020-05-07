@@ -5,79 +5,37 @@
     <title>用户调查问卷</title>
 </head>
 <body>
-    <h2>欢迎来到调查问卷页面，请根据自身需求选择以便我们更好地为您进行推荐：</h2>
+<form action="recommend_result" method="post">
 
     <h4>问题1：请问你最近需要买卖房屋还是租赁房屋？</h4>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-      <label class="form-check-label" for="exampleRadios1">
-        买卖房屋
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-      <label class="form-check-label" for="exampleRadios2">
-        租赁房屋
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" >
-      <label class="form-check-label" for="exampleRadios3">
-        我没有太大的偏好，都可以
-      </label>
-    </div>
+    <input type="radio" name="question1" value="sale" checked/>买卖房屋
+    <input type="radio" name="question1" value="rent"/>租赁房屋
+    <input type="radio" name="question1" value="SaleAndRent"/>并无偏重
+    <br>
 
     <h4>问题2：请问你比较偏重以下哪种中介（关注人数比较多的中介/累计评价比较多的中介）？</h4>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-      <label class="form-check-label" for="exampleRadios1">
-        关注人数较多的中介
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-      <label class="form-check-label" for="exampleRadios2">
-        累计评价较多的中介
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" >
-      <label class="form-check-label" for="exampleRadios3">
-        以上两点我都很偏重
-      </label>
-    </div>
+    <input type="radio" name="question2" value="follower" checked/>关注人数较多的中介
+    <input type="radio" name="question2" value="comment"/>累计评价数量较多的中介
+    <input type="radio" name="question2" value="FollowerAndComment"/>以上两种我都很偏重
+    <br>
 
     <h4>问题3：请问你比较偏重以下哪种中介（近30天内带看房次数比较多的中介/神准时、活地图等标签在评论中占比比较高的中介）？</h4>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-      <label class="form-check-label" for="exampleRadios1">
-        近30天内带看房次数比较多的中介
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-      <label class="form-check-label" for="exampleRadios2">
-        神准时、活地图等标签在评论中占比比较高的中介
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" >
-      <label class="form-check-label" for="exampleRadios3">
-        以上两点我都很偏重
-      </label>
-    </div>
+    <input type="radio" name="question3" value="30days" checked/>近30天内带看房次数比较多的中介
+    <input type="radio" name="question3" value="biaoqian"/>神准时、活地图等标签在评论中占比比较高的中介
+    <input type="radio" name="question3" value="30daysAndBiaoqian"/>以上两点我都很偏重
+    <br>
 
     <h4>问题4：请问你想要被推荐多少个中介？</h4>
-    <div class="form-group">
-        <label for="exampleFormControlSelect1">要想被推荐的中介个数：</label>
-        <select class="form-control" id="exampleFormControlSelect1">
-          <option>5</option>
-          <option>10</option>
-          <option>15</option>
-          <option>20</option>
-        </select>
-    </div>
-    <a href="recommend_result" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">提交我的选择</a>
-    <a href="home" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">返回推荐系统主页</a>
+    <input type="radio" name="question4" value="5" checked/>5
+    <input type="radio" name="question4" value="10"/>10
+    <input type="radio" name="question4" value="15"/>15
+    <input type="radio" name="question4" value="20"/>20
+    <br>
+    <input type="submit" value="提交我的选择并开始进行个性化推荐"/>
+    <a href=".." class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">返回推荐系统主页</a>
+
+</form>
+
+
 </body>
 </html>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/recommend_app/agent_infors/agentIDs.xlsx" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/recommend_app/data/cidian/degree_word.xlsx" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/recommend_app/data/cidian/emotion_words.xlsx" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/recommend_app/data/cidian/no_words.txt" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/recommend_app/data/cidian/stopwords_chuli.txt" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/recommend_app/seetings.py" charset="GBK" />
+  </component>
+</project>
