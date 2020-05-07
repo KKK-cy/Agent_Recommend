@@ -86,7 +86,7 @@ def get_all_words(fileinpath):
             if word in all_words_times.keys():
                 all_words_times[word] += 1
     result = sorted(all_words_times.items(), key=lambda x: x[1], reverse=True)
-    print("所有词语的出现总次数由高到低排序为：%s " % result)
+    # print("所有词语的出现总次数由高到低排序为：%s " % result)
     return result
 
 

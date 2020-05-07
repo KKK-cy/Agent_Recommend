@@ -1,10 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCtype HTML>
 <head>
-    <meta charset="UTF-8">
-    <title>这里显示的是推荐结果</title>
+    <title>推荐结果展示网页</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+          integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 </head>
 <body>
-<a href="../.." class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">返回推荐系统主页</a>
+<h2> 根据您的选择，调整后的权重列表为：{{ quanzhong }}，推荐的中介个数为：{{ agent_num }} </h2>
+<a href="..">返回推荐系统主页</a>
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            {% for agent_info in recommend_list %}
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="{{ agent_info.agent_img }}" alt="" height="350px">
+                        <div class="card-body">
+                            <h5 class="card-title"><b style="color: red">{{ agent_info.agent_name }}</b></h5>
+
+                            <h7>服务年限：<b>{{ agent_info.service_year }}</b>年</h7>
+                            <h7>关注人数：<b>{{ agent_info.followers_number }}</b>人</h7>
+                            </br>
+                            <h7>平均每年买卖房屋成交量：<b>{{ agent_info.sales_num_every_year }}</b>套/年&nbsp</h7>
+                            </br>
+                            <h7>平均每年租赁房屋成交量：<b>{{ agent_info.rent_num_every_year }}</b>套/年&nbsp</h7>
+                            </br>
+                            <h7>近30天买卖带看房次数：<b>{{ agent_info.kanfang_number_30_days }}</b>次&nbsp;&nbsp;&nbsp;&nbsp;</h7>
+                            </br>
+                            <h7>累计评论条数：<b>{{ agent_info.comments_number }}</b>条</h7>
+                            </br>
+                            <h7>联系方式：<b style="color: red">{{ agent_info.phone_number }}</b></h7>
+
+                            <a href="{{ agent_info.agent_url }}" target="-blank"
+                               class="btn btn-primary">访问{{ agent_info.agent_name }}的主页获取更多详细信息</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <br>
+
+        </div>
+    </div>
+</div>
 </body>
-</html>

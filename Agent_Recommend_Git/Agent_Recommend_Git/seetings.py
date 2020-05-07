@@ -12,6 +12,8 @@ import pandas as pd
 
 # 评论中字符的最少个数
 import sqlalchemy
+import warnings
+warnings.filterwarnings("ignore")
 
 min_comment_zifu = 3
 # 出现次数最高的前250个词，从中手动筛选出常见的程度副词并给定权值
@@ -20,9 +22,9 @@ degree_nums = 250
 top_k_words = 12
 # 每个中介要保留的邻居个数
 neighbors = 3
-# 权重值矩阵，依次是：【评分  情感得分值  平分给服务年限、买卖成交、租赁成交、30天看房数量、关注人数和标签平均占百分比】
+# 权重值矩阵，依次是：【评分  情感得分值  服务年限、买卖成交、租赁成交、30天看房数量、关注人数和标签平均占百分比】
 w = [0.2, 0.5, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
-# 最终推荐个数
+# 最终推荐个数,初始化为5
 recommend_number = 5
 
 """ 数据库相关信息 """
@@ -37,39 +39,36 @@ zhongjian_recommend_score_table = "recommend_score"
 
 """一些文件存储路径"""
 """ 中介源ID列表 """
-agent_ids = '../agent_infors/agentIDs.xlsx'
+agent_ids = 'Agent_Recommend_Git/agent_infors/agentIDs.xlsx'
 """ 爬取到的中介评论文件 """
-agent_comments = '../agent_infors/AgentComments.csv'
+agent_comments = 'Agent_Recommend_Git/agent_infors/AgentComments.csv'
 """ 爬取到的中介其他信息文件 """
-agent_other_information = '../agent_infors/AgentOtherInfor.csv'
+agent_other_information = 'Agent_Recommend_Git/agent_infors/AgentOtherInfor.csv'
 
 # 处理后的中介评论文件
-chuli_agent_comments = "../agent_infors/chuli_AgentComments.csv"
+chuli_agent_comments = "Agent_Recommend_Git/agent_infors/chuli_AgentComments.csv"
 # 处理后的中介其他信息文件
-chuli_agent_other_information = "../agent_infors/chuli_AgentOtherInfor.csv"
+chuli_agent_other_information = "Agent_Recommend_Git/agent_infors/chuli_AgentOtherInfor.csv"
 
 # 分词结果文件
-fenci_result = "../data/result/comments_fenci.csv"
+fenci_result = "Agent_Recommend_Git/data/result/comments_fenci.csv"
 # 根据前250个词语产生常见的程度副词词典
-top_250_word_path = "../data/result/top_250.txt"
+top_250_word_path = "Agent_Recommend_Git/data/result/top_250.txt"
 # 分词结果分类为情感词、程度副词、否定词文件
-fenci_result_fenlei = "../data/result/emotion_degree_no_words.csv"
+fenci_result_fenlei = "Agent_Recommend_Git/data/result/emotion_degree_no_words.csv"
 # 存储推荐总得分文件
-recommend_score = "../data/result/recommend_score.csv"
+recommend_score = "Agent_Recommend_Git/data/result/recommend_score.csv"
 
 # 首要推荐依据
-recommend_first = "../data/result/recommend_yiju/recommend_first.txt"
+recommend_first = "Agent_Recommend_Git/data/result/recommend_yiju/recommend_first.txt"
 # 次要推荐依据
-recommend_second = "../data/result/recommend_yiju/recommend_second.csv"
+recommend_second = "Agent_Recommend_Git/data/result/recommend_yiju/recommend_second.csv"
 
 # 相关的词典文件
-stopwords_in_path = "../data/cidian/stopwords_chuli.txt"
-emotion_in_path = "../data/cidian/emotion_words.xlsx"
-degree_in_path = "../data/cidian/degree_word.xlsx"
-no_in_path = "../data/cidian/no_words.txt"
-
-html_path = "../recommend_result.html"
-
+stopwords_in_path = "Agent_Recommend_Git/data/cidian/stopwords_chuli.txt"
+emotion_in_path = "Agent_Recommend_Git/data/cidian/emotion_words.xlsx"
+degree_in_path = "Agent_Recommend_Git/data/cidian/degree_word.xlsx"
+no_in_path = "Agent_Recommend_Git/data/cidian/no_words.txt"
 
 # 一些公用函数
 def save_as_csv(df, fileoutpath):

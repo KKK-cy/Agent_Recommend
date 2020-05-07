@@ -8,7 +8,7 @@
         2. 根据推荐列表获取中介的详细信息，并写入结果展示界面
 """
 import pandas as pd
-from ..seetings import chuli_agent_other_information, html_path, recommend_number
+from ..seetings import chuli_agent_other_information, recommend_number
 
 
 def get_first_recom(fileinpath):
@@ -43,8 +43,10 @@ def recommend(recommend_list, df, recommend_number):
                 # print("    将 %s 的邻居加入推荐列表并去重后为：%s" % (i, final_list))
             # else:
                 # print("    %s 已在推荐列表中" % i)
-        else:
+        elif len(final_list) > recommend_number:
             # print("    推荐个数 %s 已达到...即将退出推荐" % recommend_number)
+            final_list.pop()
+        else:
             print("最终产生的推荐列表为 %s " % final_list)
             return final_list
 
