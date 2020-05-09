@@ -2,37 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>用户调查问卷</title>
+    <title>调查问卷页面</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1>欢迎来到个性化推荐的调查问卷页面</h1>
+            <p class="lead text-muted">请根据您的真实需求进行以下问题答案的选择，本推荐系统会根据您的选择进行个性化推荐</p>
+            <p>
+                <a href=".." class="btn btn-primary my-2">返回推荐系统首页</a>
+            </p>
+        </div>
+    </section>
 <form action="recommend_result" method="post">
 
-    <h4>问题1：请问你最近需要买卖房屋还是租赁房屋？</h4>
+    <h5>问题1：请问你最近需要买卖房屋还是租赁房屋？</h5>
     <input type="radio" name="question1" value="sale" checked/>买卖房屋
     <input type="radio" name="question1" value="rent"/>租赁房屋
     <input type="radio" name="question1" value="SaleAndRent"/>并无偏重
     <br>
+    <br>
 
-    <h4>问题2：请问你比较偏重以下哪种中介（关注人数比较多的中介/服务年限比较久的中介）？</h4>
+    <h5>问题2：请问你比较偏重以下哪种中介（关注人数比较多的中介/服务年限比较久的中介）？</h5>
     <input type="radio" name="question2" value="follower" checked/>关注人数较多的中介
     <input type="radio" name="question2" value="serviceyear"/>服务年限比较久的中介
     <input type="radio" name="question2" value="FollowerAndServiceyear"/>以上两种我都很偏重
     <br>
-
-    <h4>问题3：请问你比较偏重以下哪种中介（近30天内带看房次数比较多的中介/神准时、活地图等标签在评论中占比比较高的中介）？</h4>
+    <br>
+    <h5>问题3：请问你比较偏重以下哪种中介（近30天内带看房次数比较多的中介/神准时、活地图等标签在评论中占比比较高的中介）？</h5>
     <input type="radio" name="question3" value="30days" checked/>近30天内带看房次数比较多的中介
     <input type="radio" name="question3" value="biaoqian"/>神准时、活地图等标签在评论中占比比较高的中介
     <input type="radio" name="question3" value="30daysAndBiaoqian"/>以上两点我都很偏重
     <br>
-
-    <h4>问题4：请问你想要被推荐多少个中介？</h4>
+    <br>
+    <h5>问题4：请问你想要被推荐多少个中介？</h5>
     <input type="radio" name="question4" value="5" checked/>5
     <input type="radio" name="question4" value="10"/>10
     <input type="radio" name="question4" value="15"/>15
     <input type="radio" name="question4" value="20"/>20
     <br>
+    <br>
     <input type="submit" value="提交我的选择并开始进行个性化推荐"/>
-    <a href=".." class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">返回推荐系统主页</a>
+    <br>
 
 </form>
 

@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.6">
-    <title>多维度中介推荐系统</title>
+    <title>融合情感分析的多维度中介推荐系统</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/album/">
 
@@ -52,10 +52,17 @@
                 <div class="col-sm-8 col-md-7 py-4">
                     <h4 class="text-white">关于本系统</h4>
                     <p class="text-muted">
-                        本系统通过网络爬虫爬取我爱我家官网上的250个中介的评论数据和相关信息作为推荐使用的数据集。通过对中介评论进行情感得分计算，后与中介原始评分进行加权求和得到中介的推荐得分；后根据中介的其他相关信息，如关注人数、买卖房屋数量等数据使用调查问卷的方式获取到用户的喜好，分配不同的权重，最终实现中介相似度的计算，形成次要推荐依据。最终根据用户想要被推荐的中介数量来进行推荐。</p>
+                        本系统通过网络爬虫爬取我爱我家官网上的250个中介的评论数据和相关信息作为推荐使用的数据集。
+                        通过对中介评论进行基于情感词典的情感分析得到评论的情感分值，再根据用户的个性化选择与中介原始评分、服务年限、
+                        平均每年买卖房屋数量等多个指标进行融合得到最终推荐得分，并根据推荐总得分排序得到首要推荐依据；
+                        再根据从中介评论数据集中产生的出现次数最高的前N个词语（除去程度副词和否定词），以及每个中介的所有评论中这N个词
+                        的出现频率形成中介-词语矩阵，再融合推荐总得分得到中介-情感矩阵来计算中介之间的相似度，最后为每个中介保留K个邻居
+                        形成次要推荐依据；
+                        推荐时，先从首要推荐依据中获得排名第一的中介，再从次要依据中找到该中介的邻居进行推荐，若不满足推荐个数要求，继续
+                        从首要推荐依据中按照先后顺序获取中介，直至满足最终推荐个数的要求。</p>
                 </div>
                 <div class="col-sm-4 offset-md-1 py-4">
-                    <h4 class="text-white">若有任何疑问请联系本人</h4>
+                    <h4 class="text-white">若有任何疑问请联系KCY</h4>
                     <ul class="list-unstyled">
                         <li><a href="#" class="text-white">通过QQ联系</a></li>
                         <li><a href="#" class="text-white">通过微信联系</a></li>
@@ -75,7 +82,7 @@
                           clip-rule="evenodd"/>
                     <circle cx="8" cy="8" r="3"/>
                 </svg>
-                <strong>Welcome</strong>
+                <strong>Welcome To My Recommend System</strong>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"
                     aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,10 +96,10 @@
 
     <section class="jumbotron text-center">
         <div class="container">
-            <h1>欢迎来到多维度中介推荐系统</h1>
-            <p class="lead text-muted">以下为我们通过网络爬虫的方式爬取到的我爱我家官网上的中介信息：</p>
+            <h1>欢迎来到融合文本情感分析的多维度中介推荐系统</h1>
+            <p class="lead text-muted">以下为我通过爬虫的方式爬取到的我爱我家官网上的中介信息：</p>
             <p>
-                <a href="wenjuan" class="btn btn-primary my-2">填写我的需求获得更精准的推荐</a>
+                <a href="wenjuan" class="btn btn-primary my-2">填写我的需求以便获得更精准的推荐</a>
             </p>
         </div>
     </section>
@@ -123,7 +130,7 @@
                                 <h7>联系方式：<b style="color: red">{{ agent_info.phone_number }}</b></h7>
 
                                 <a href="{{ agent_info.agent_url }}" target="-blank"
-                                   class="btn btn-primary">访问{{ agent_info.agent_name }}的主页获取更多详细信息</a>
+                                   class="btn btn-primary">访问{{ agent_info.agent_name }}的主页</a>
                             </div>
                         </div>
                     </div>
@@ -131,7 +138,6 @@
             </div>
         </div>
     </div>
-
 </main>
 
 <footer class="text-muted">
@@ -139,7 +145,7 @@
         <p class="float-right">
             <a href="#">回到最上方</a>
         </p>
-        <p>本系统暂时收录到的中介信息可能不够全面，后期会继续进行中介个数的增加</p>
+        <p>本推荐系统会定时爬取网络上的中介信息并收录到系统中，以便给您提供更精准的推荐</p>
     </div>
 </footer>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

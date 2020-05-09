@@ -8,8 +8,9 @@ from Agent_Recommend_Git.other_scripts.recommend_way_6 import get_first_recom, g
 from recommend_app.models import Agents_other_info
 
 from Agent_Recommend_Git.seetings import w, fenci_result, fenci_result_fenlei, recommend_score, csv_to_database, \
-    database_name, zhongjian_recommend_score_table, recommend_first,recommend_second, get_engine, neighbors
+    database_name, zhongjian_recommend_score_table, recommend_first, recommend_second, get_engine, neighbors
 import warnings
+
 warnings.filterwarnings("ignore")
 """ 
 主页：显示部分中介的名片卡 
@@ -19,6 +20,7 @@ warnings.filterwarnings("ignore")
 def home(request):
     agent_infos = Agents_other_info.objects.all()[:24]
     return render(request, 'home.html', {'agent_infos': agent_infos})
+
 
 
 # 显示注册页面
@@ -65,7 +67,7 @@ def wenjuan(request):
     else:
         w[5], w[7] = 0.05, 0.05
 
-    print("根据您的选择，权重矩阵调整后为：%s，推荐的中介个数为：%s" % (w,answer4))
+    print("根据您的选择，权重矩阵调整后为：%s，推荐的中介个数为：%s" % (w, answer4))
     recommend_number = int(answer4)
     recommend_second = "Agent_Recommend_Git/data/result/recommend_yiju/recommend_second.csv"
 
@@ -90,7 +92,7 @@ def wenjuan(request):
     # neighbors_result = get_k_neighbors(agent_list, similar_df, neighbors)
     # neighbors_result.to_csv(recommend_second, index=False)
     # print("所有中介的 %d 个邻居(即次要推荐依据)已写入文件 %s ." % (neighbors,recommend_second))
-
+    #
     print("4.根据首要推荐依据和次要推荐依据进行 %d 个中介的推荐" % recommend_number)
     recommend_list = get_first_recom(recommend_first)
     print("4.1 获取到的首要推荐依据为：%s" % recommend_list)
@@ -104,7 +106,8 @@ def wenjuan(request):
         agent_info = Agents_other_info.objects.get(agent_id=agent)
         agent_infos.append(agent_info)
 
-    return render(request, 'recommend_result.html',{"quanzhong":w,"agent_num":answer4,"recommend_list":agent_infos})
+    return render(request, 'recommend_result.html',
+                  {"quanzhong": w, "agent_num": answer4, "recommend_list": agent_infos})
 
 
 def recommend_result(request):

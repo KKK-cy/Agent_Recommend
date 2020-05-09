@@ -6,10 +6,20 @@
           crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
           integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+
 </head>
 <body>
-<h2> 根据您的选择，调整后的权重列表为：{{ quanzhong }}，推荐的中介个数为：{{ agent_num }} </h2>
-<a href="..">返回推荐系统主页</a>
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1>欢迎来到个性化中介推荐系统的推荐结果显示页面，以下为给您推荐的{{ agent_num }}个中介：</h1>
+        <p class="lead text-muted">根据您的选择，调整后的权重列表为：{{ quanzhong }}</p>
+        <p>
+            <a href=".." class="btn btn-primary my-2">返回推荐系统首页</a>
+        </p>
+    </div>
+</section>
+{#<h2> 根据您的选择，调整后的权重列表为：{{ quanzhong }}，推荐的中介个数为：{{ agent_num }} </h2>#}
+{#<a href=".." class="btn btn-primary my-2">返回推荐系统主页</a>#}
 <div class="album py-5 bg-light">
     <div class="container">
         <div class="row">
