@@ -6,13 +6,13 @@
     脚本说明：
         对分词结果进行分类
 """
+from tqdm import tqdm
+
 from ..seetings import emotionwordslist, emotion_in_path, degreewordslist, degree_in_path, nowordslist, no_in_path, \
     save_as_csv
-
-"""对分词结果进行分类"""
 import pandas as pd
 
-
+# 对分词结果进行分类
 def seg_result_emotionwords(fileinpath, fileoutpath):
     agent_info_df = pd.read_csv(fileinpath)
     # 情感词典列表
@@ -24,7 +24,7 @@ def seg_result_emotionwords(fileinpath, fileoutpath):
     agent_list = list(set(list(agent_info_df["agent_id"])))
 
     """对于每个中介，获取到它的分词结果列表并对其中的词语进行判断"""
-    for agent_id in agent_list:
+    for agent_id in tqdm(agent_list):
         agent_df = agent_info_df.loc[agent_info_df["agent_id"] == agent_id]
         # print("该中介的评论有%s条" % str(len(agent_df)))
         agent_df["emotion_words"] = ""
@@ -63,3 +63,4 @@ def seg_result_emotionwords(fileinpath, fileoutpath):
         final_result_df = final_result_df.append(agent_df, sort=False)
 
     save_as_csv(final_result_df, fileoutpath)
+    print("分词结果分类成功!")

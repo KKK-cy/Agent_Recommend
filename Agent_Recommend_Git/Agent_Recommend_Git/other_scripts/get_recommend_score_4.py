@@ -10,6 +10,7 @@
 """
 import pandas as pd
 from numpy import mean
+from tqdm import tqdm
 
 from ..seetings import chuli_agent_other_information, save_as_csv
 
@@ -72,7 +73,7 @@ def get_emotion_score(fileinpath, fileoutpath, w):
     agent_info_df = pd.read_csv(fileinpath)
     agent_list = list(set(list(agent_info_df["agent_id"])))
     final_result_df = pd.DataFrame()
-    for agent_id in agent_list:
+    for agent_id in tqdm(agent_list):
         # print("%s 的评论中的情感分值计算即将开始..." % str(agent_id))
         agent_df = agent_info_df.loc[agent_info_df["agent_id"] == agent_id]
         agent_star_score = agent_df["star_score"].tolist()

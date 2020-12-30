@@ -10,35 +10,32 @@
 """
 import pandas as pd
 import numpy as np
-
+from tqdm import tqdm
 from ..other_scripts.get_degree_words_2 import get_all_words, get_agent_juzhen
 from ..seetings import fenci_result, top_k_words, recommend_score
 
-"""---------------------- 融合矩阵计算相似度并保留邻居集的函数 ---------------------"""
-
-
+# 根据中介-词语矩阵 和 评论文本情感分值 产生  中介-情感矩阵
 def ronghe_juzhen():
     # 1.获取中介-词语矩阵
     result = get_all_words(fenci_result)
-    print("3.1 开始获取中介 - 词语矩阵")
+    # print("3.1 开始获取中介 - 词语矩阵")
     agent_df = get_agent_juzhen(fenci_result, result, top_k_words)
     # 2.融合推荐总得分形成中介-情感矩阵
-    print("3.2 开始拼接中介-情感矩阵")
+    # print("3.2 开始拼接中介-情感矩阵")
     data = pd.read_csv(recommend_score)
     recommend_df = pd.DataFrame(data, columns=["agent_id", "recommend_score"]).drop_duplicates()
     final_df = pd.merge(recommend_df, agent_df, on="agent_id")
-    print("3.3 拼接后得到的中介-情感矩阵为：%s" % final_df)
+    # print("3.3 拼接后得到的中介-情感矩阵为：%s" % final_df)
+    print("产生中介-情感矩阵成功！")
     return final_df
 
 
-"""根据传入的矩阵计算中介之间的相似度，并保留k个邻居"""
-
-
+# 根据中介-情感矩阵计算中介之间的相似度，并保留k个邻居
 def get_similar(df):
     agent_list = df["agent_id"].tolist()
     final_result = pd.DataFrame(index=agent_list, columns=agent_list)
-    print("3.4 开始根据中介-情感矩阵计算中介两两之间的相似度，花费时间可能较长，请耐心等候哦")
-    for loc1 in range(len(agent_list)):
+    # print("3.4 根据 中介-情感矩阵 计算中介两两之间的相似度，花费时间可能较长，请耐心等候哦")
+    for loc1 in tqdm(range(len(agent_list))):
         for loc2 in range(len(agent_list)):
             if loc1 == loc2:
                 # print("%s与自身的相似度默认为1" % agent_list[loc1])
@@ -60,9 +57,9 @@ def get_similar(df):
 
 
 def get_k_neighbors(agent_list, df, neighbors):
-    print("3.5 开始根据相似度高低获取中介的邻居集")
+    # print("3.5 根据相似度高低获取中介的邻居集")
     result = []
-    for agent_id in agent_list:
+    for agent_id in tqdm(agent_list):
         agent_info_df = df[agent_id]
         agent_info_dict = agent_info_df.to_dict()
         final_result = []

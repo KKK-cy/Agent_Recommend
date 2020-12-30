@@ -13,7 +13,7 @@ import sqlalchemy
 import warnings
 warnings.filterwarnings("ignore")
 
-# 评论中字符的最少个数
+# 有效评论的最小字数
 min_comment_zifu = 3
 # 出现次数最高的前250个词，从中手动筛选出常见的程度副词并给定权值
 degree_nums = 250
@@ -21,7 +21,7 @@ degree_nums = 250
 top_k_words = 12
 # 每个中介要保留的邻居个数
 neighbors = 3
-# 权重值矩阵，依次是：【评分  情感得分值  服务年限、买卖成交、租赁成交、30天看房数量、关注人数和标签平均占百分比】
+# 权重值矩阵，依次是：【原始评分  评论文本情感得分值  服务年限、买卖成交、租赁成交、30天看房数量、关注人数和标签平均占百分比】
 w = [0.2, 0.5, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
 # 最终推荐个数,初始化为5
 recommend_number = 5
@@ -72,11 +72,11 @@ no_in_path = "Agent_Recommend_Git/data/cidian/no_words.txt"
 # 一些公用函数
 def save_as_csv(df, fileoutpath):
     if os.path.exists(fileoutpath):
-        print("[ 文件已存在,将删除重写 ]", end=" ,")
+        print("[ 文件已存在,将删除重写 ]")
         os.remove(fileoutpath)
         df.to_csv(fileoutpath, mode='a+', index=False, encoding="utf-8")
     else:
-        print('[ 文件不存在，将创建 ]', end=" ,")
+        print('[ 文件不存在，将创建 ]')
         df.to_csv(fileoutpath, index=False, encoding="utf-8")
 
 
@@ -115,10 +115,9 @@ def csv_to_database(engine, file_name, database_name, table_name):
     df = pd.read_csv(file_name)
     try:
         df.to_sql(table_name, engine, index=False)
-        print("    %s 文件已写入数据库 %s 的 %s 表中" % (file_name, database_name, table_name))
+        print("{file_name}文件已写入{database_name}的{table_name}表".format(file_name=file_name, database_name=database_name, table_name=table_name))
     except ValueError:
-        print("    %s 表在数据库 %s 中已存在" % (table_name, database_name), end="   ,")
+        # 表已存在，删除并重新写入
         engine.execute("drop table if exists %s" % table_name)
-        print("    %s 表已删除，即将重新写入数据..." % table_name, end="    ,")
         df.to_sql(table_name, engine, index=False)
-        print("    %s 文件已写入数据库 %s 的 %s 表中" % (file_name, database_name, table_name))
+        print("表{table_name}已存在，删除并重新插入{file_name}的数据".format(table_name=table_name,file_name=file_name))

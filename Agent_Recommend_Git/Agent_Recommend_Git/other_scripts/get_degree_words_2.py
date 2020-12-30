@@ -9,12 +9,12 @@
 """
 import jieba
 import pandas as pd
-
+from tqdm import tqdm
 from ..seetings import stopwordslist, stopwords_in_path, save_as_csv, top_250_word_path, degreewordslist, degree_in_path, \
     nowordslist, no_in_path
 
 """---------------------------- 2. 统计词语出现次数，获取常见的程度副词词典和中介-词语矩阵 -----------------"""
-"""1. 对评论进行分词并将分词结果保存至新的文件"""
+# 对某条评论进行分词
 def segComment(sentence, stopwords):
     # 添加自定义词语
     wordslist = ['靠谱', '能力强']
@@ -34,7 +34,7 @@ def segComment(sentence, stopwords):
         outstr += " "
     return outstr
 
-
+# 分词函数（输入：分词前的评论文件，分词结果文件）
 def fenci(fileinpath, fileoutpath):
     print("2.1 开始分词 ",end=" ,")
     agent_info_df = pd.read_csv(fileinpath)
@@ -42,24 +42,27 @@ def fenci(fileinpath, fileoutpath):
     final_result_df = pd.DataFrame()
     agent_list = list(set(list(agent_info_df["agent_id"])))
 
-    for agent_id in agent_list:
+    # 遍历每个中介
+    for agent_id in tqdm(agent_list):
         agent_df = agent_info_df.loc[agent_info_df["agent_id"] == agent_id]
         agent_df["seg_comment_result"] = ""
         seg_comment_list = []
+        # 遍历该中介的每条评论
         for comment in agent_df["comment"]:
             seg_comment = segComment(comment, stopwords)
             seg_comment_list.append(seg_comment)
         agent_df["seg_comment_result"] = seg_comment_list
-        # 将该agent的分词结果保存进总结果中
+        # 将该中介的分词结果保存进总结果中
         final_result_df = final_result_df.append(agent_df, sort=False)
+
     save_as_csv(final_result_df, fileoutpath)
     print("分词完成，分词结果已保存至文件 %s " % fileoutpath)
 
 
 
-"""2.统计所有词语的出现次数"""
+# 读取分词结果文件，统计所有词语的出现次数
 def get_all_words(fileinpath):
-    print("2.2 开始统计所有词语的出现次数")
+    # print("2.2 开始统计所有词语的出现次数")
     data = pd.read_csv(fileinpath)
 
     fenci_result_df = data["seg_comment_result"]
@@ -73,7 +76,7 @@ def get_all_words(fileinpath):
         for word in comment_word_list:
             if word not in all_words and word != "":
                 all_words.append(word)
-    print("共有 %d 个词语" % len(all_words), end=" ,")
+    # print("共有 %d 个词语" % len(all_words), end=" ,")
 
     # 将所有词语转化为字典，初始值给0
     all_words_times = all_words_times.fromkeys(all_words, 0)
@@ -97,7 +100,7 @@ def get_top_k_words(result, degree_nums):
     for i in final_result:
         top_k_words[i[0]] = i[1]
     top_k_words_list = list(top_k_words.keys())
-    print("出现次数最高的前 %s 个词语为： %s " % (degree_nums, str(top_k_words_list)))
+    # print("出现次数最高的前 %s 个词语为： %s " % (degree_nums, str(top_k_words_list)))
     return top_k_words_list
 
 
@@ -128,7 +131,7 @@ def get_agent_juzhen(fileinpath, result, number):
         elif k_word in no_words:
             # print("%s在否定词中，需要删除..." % k_word)
             top_k_words_list.remove(k_word)
-    print("从中去除一些副词和否定词后剩余 %d 个，为：%s" % (len(top_k_words_list), top_k_words_list))
+    print("最终产生的{num}个词语为{words}".format(num=len(top_k_words_list),words=top_k_words_list))
 
     all_agent_result = []
     for agent_id in agent_id_list:
@@ -156,6 +159,5 @@ def get_agent_juzhen(fileinpath, result, number):
 
     top_k_words_list.append("agent_id")
     agent_df = pd.DataFrame(all_agent_result, columns=top_k_words_list)
-    print("产生的中介-词语矩阵为：")
-    print(agent_df)
+    print("产生中介-词语矩阵成功！")
     return agent_df

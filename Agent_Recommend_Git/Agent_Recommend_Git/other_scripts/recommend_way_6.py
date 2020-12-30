@@ -10,12 +10,12 @@
 import pandas as pd
 from ..seetings import chuli_agent_other_information, recommend_number
 
-
+# 首要推荐依据
 def get_first_recom(fileinpath):
     recommend_list = [line.strip() for line in open(fileinpath, encoding='GBK').readlines()]
     return recommend_list
 
-
+# 次要推荐依据
 def get_second_recom(fileinpath):
     data = pd.read_csv(fileinpath)
     data = data.set_index("agent_id").T.to_dict("list")
