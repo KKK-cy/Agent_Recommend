@@ -9,12 +9,11 @@
 
 import os
 import pandas as pd
-
-# 评论中字符的最少个数
 import sqlalchemy
 import warnings
 warnings.filterwarnings("ignore")
 
+# 评论中字符的最少个数
 min_comment_zifu = 3
 # 出现次数最高的前250个词，从中手动筛选出常见的程度副词并给定权值
 degree_nums = 250
