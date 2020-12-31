@@ -8,8 +8,8 @@ from Agent_Recommend_Git.other_scripts.get_recommend_score_4 import get_emotion_
 from Agent_Recommend_Git.other_scripts.recommend_way_6 import get_first_recom, get_second_recom, recommend
 from recommend_app.models import Agents_other_info
 from Agent_Recommend_Git.seetings import w, fenci_result, fenci_result_fenlei, recommend_score, csv_to_database, \
-    database_name, zhongjian_recommend_score_table, recommend_first, recommend_second, get_engine, neighbors, \
-    agent_comments, chuli_agent_comments, agent_other_information, chuli_agent_other_information
+    database_name, recommend_score_table, recommend_first, recommend_second, get_engine, neighbors, \
+    agent_comments, chuli_agent_comments, agent_other_information, chuli_agent_other_information,recommend_second_table
 
 import warnings
 
@@ -67,6 +67,13 @@ def wenjuan(request):
         w[5], w[7] = 0.05, 0.05
 
     print("根据您的选择，权重矩阵调整后为：%s，推荐的中介个数为：%s" % (w, answer4))
+    print("""即：
+    中介原始评分均值对应权重<{w0}>，评论文本情感得分均值对应权重<{w1}>,
+    服务年限对应权重<{w2}>，买卖房屋数量对应权重<{w3}>，
+    租赁房屋数量对应权重<{w4}>，30天内带看房次数对应权重<{w5}>，
+    关注人数对应权重<{w6}>，标签平均占比对应权重<{w7}>
+    """.format(w0=w[0],w1=w[1],w2=w[2],w3=w[3],w4=w[4],w5=w[5],w6=w[6],w7=w[7]))
+
     recommend_number = int(answer4)
     recommend_second = "Agent_Recommend_Git/data/result/recommend_yiju/recommend_second.csv"
 
@@ -97,7 +104,7 @@ def wenjuan(request):
     print("1.按照权重{w}融合评论情感得分值和其它维度信息计算 推荐总得分".format(w=w))
     get_emotion_score(fenci_result_fenlei, recommend_score, w)
     print("推荐总得分已写入文件< {recommend_score} >，即将写入数据库".format(recommend_score=recommend_score))
-    csv_to_database(engine, recommend_score, database_name, zhongjian_recommend_score_table)
+    csv_to_database(engine, recommend_score, database_name, recommend_score_table)
     print("按照推荐总得分排序形成首要推荐依据并写入文件<{recommend_first}>".format(recommend_first=recommend_first))
     recom_first(recommend_score, recommend_first)
 
@@ -109,7 +116,9 @@ def wenjuan(request):
     neighbors_result = get_k_neighbors(agent_list, similar_df, neighbors)
     neighbors_result.to_csv(recommend_second, index=False)
     print(
-        "所有中介的{num}个邻居(即次要推荐依据)已写入文件< {recommend_second} > .".format(num=neighbors, recommend_second=recommend_second))
+        "所有中介的{num}个邻居(即次要推荐依据)已写入文件< {recommend_second} >，即将写入数据库".format(num=neighbors, recommend_second=recommend_second))
+    csv_to_database(engine,recommend_second,database_name,recommend_second_table)
+
 
     print("6.根据首要推荐依据和次要推荐依据进行 %d 个中介的推荐" % recommend_number)
     recommend_list = get_first_recom(recommend_first)
@@ -123,6 +132,25 @@ def wenjuan(request):
     for agent in final_result:
         agent_info = Agents_other_info.objects.get(agent_id=agent)
         agent_infos.append(agent_info)
+
+    print(agent_infos)
+
+    # 在控制台输出一下推荐的中介信息，便于在论文第4章截图
+    print("推荐的{num}名中介的信息如下：".format(num=recommend_number))
+    for recommend_agent in agent_infos:
+        print("中介ID为：{agent_id}，姓名为{agent_name}".format(agent_id=recommend_agent.agent_id,
+                                                        agent_name=recommend_agent.agent_name))
+        print("个人主页为：{agent_url}".format(agent_url=recommend_agent.agent_url))
+        print("服务年限为：{service_year}，买卖成交量为：{sale_number}，租赁成交量为{rent_number}".format(
+            service_year=recommend_agent.service_year,
+            sale_number=recommend_agent.sale_number,
+            rent_number=recommend_agent.rent_number))
+        print("30天内带看房次数为：{kanfang_number_30_days}，关注人数为{followers_number}".format(
+            kanfang_number_30_days=recommend_agent.kanfang_number_30_days,
+            followers_number=recommend_agent.followers_number
+        ))
+        print("-------------------------------------------------------")
+
     # 传入推荐中介信息，动态加载推荐结果页面
     return render(request, 'recommend_result.html',
                   {"quanzhong": w, "agent_num": answer4, "recommend_list": agent_infos})

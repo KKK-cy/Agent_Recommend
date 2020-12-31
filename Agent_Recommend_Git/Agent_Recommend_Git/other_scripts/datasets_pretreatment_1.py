@@ -1,19 +1,22 @@
 # -*- coding: utf-8 -*-
-
-"""
-    # @Author : Administrator
-    # @Time : 2020/4/21 21:45
-    脚本说明：
-        对爬取到的数据进行预处理并存入数据库的对应表中
-
-"""
 import pandas as pd
 from tqdm import tqdm
-
 from ..seetings import min_comment_zifu, save_as_csv, get_engine, database_name, csv_to_database, chuli_agent_comments, \
     agent_comments_table, chuli_agent_other_information, agent_other_info_table
 
-""" 过滤某个中介的所有评论 """
+"""
+    脚本说明：预处理脚本
+    1.预处理中介评论文件：
+        - 去除字数<3的评论
+        - 删除重复评论
+        - 去除评论中的特殊字符
+    2.预处理中介其它信息文件
+        - 将各个标签的数量转换为各个标签占评论总条数的百分比，并计算出全部6个标签的平均占比
+        - 将买卖房屋和租赁房屋量 除以 服务年限，转换为平均每年买卖房屋数量和平均每年租赁房屋数量
+    3.将预处理后的数据写入数据库
+"""
+
+# 根据中介ID获取该中介的所有评论
 def comment_filter(df, agentID):
     # 1.读出文件中某个中介的全部评论
     df1 = df[df['agent_id'].isin([agentID])]
@@ -28,7 +31,7 @@ def comment_filter(df, agentID):
             "️", " ").replace("▢", " ").replace("•", " ").replace("(ง •̀_•́)ง", " "))
     return df3
 
-""" 处理全部评论数据 """
+# 处理中介评论数据
 def comment_chuli(agent_comments, chuli_agent_comments):
     data = pd.read_csv(agent_comments, dtype=str)
     df = data.fillna('')
@@ -40,11 +43,7 @@ def comment_chuli(agent_comments, chuli_agent_comments):
     save_as_csv(final_result, chuli_agent_comments)
     print("中介评论文件处理成功！处理前有评论<{num1}>条，处理后剩余<{num2}>条".format(num1=len(df),num2=len(final_result)))
 
-""" 
-    处理中介其他信息数据：
-    1. 将各个标签的个数转化成标签占评论数量的比例，并计算出所有标签的平均比例avg_biaoqian_percent
-    2. 将买卖成交量、租赁成交量转化成每年平均买卖成交量（sale_num_every_year）和每年平均租赁成交量（rent_num_every_year）
-"""
+# 处理中介其他信息数据
 def other_chuli(agent_other_information, chuli_agent_other_information):
     data = pd.read_csv(agent_other_information)
 
@@ -63,6 +62,7 @@ def other_chuli(agent_other_information, chuli_agent_other_information):
     save_as_csv(data, chuli_agent_other_information)
     print("中介其它信息文件处理成功！")
 
+# 将预处理后的结果写入数据库
 def pre_result_to_database(engine):
     print("1.3 将处理后的数据写入数据库对应的表中")
     # 根据传入的文件名、数据库名、表名将csv文件写入数据库的对应表中

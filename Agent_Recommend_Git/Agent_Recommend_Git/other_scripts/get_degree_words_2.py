@@ -1,19 +1,21 @@
 # -*- coding: utf-8 -*-
 
-"""
-    # @Author : Administrator
-    # @Time : 2020/4/21 22:14
-    脚本说明：
-        1. 对评论进行分词，统计所有词语的出现次数
-        2. 选出出现次数最高的前250个词语，手动从中筛选出常见的程度副词并给定权重值
-"""
 import jieba
 import pandas as pd
 from tqdm import tqdm
-from ..seetings import stopwordslist, stopwords_in_path, save_as_csv, top_250_word_path, degreewordslist, degree_in_path, \
+
+from ..seetings import stopwordslist, stopwords_in_path, save_as_csv, top_250_word_path, degreewordslist, \
+    degree_in_path, \
     nowordslist, no_in_path
 
-"""---------------------------- 2. 统计词语出现次数，获取常见的程度副词词典和中介-词语矩阵 -----------------"""
+"""
+    脚本说明：对评论进行分词；产生出现频率最高的前N个词语（便于从中筛选出直接分类词词典和程度副词词典）；产生中介-词语矩阵
+    1. 对预处理后的评论数据进行分词
+    2. 统计出现次数最高的前250个词语，手动从中筛选出直接分类词词典和常见的程度副词并给定权重值
+    3. 产生中介-词语矩阵
+"""
+
+
 # 对某条评论进行分词
 def segComment(sentence, stopwords):
     # 添加自定义词语
@@ -34,9 +36,10 @@ def segComment(sentence, stopwords):
         outstr += " "
     return outstr
 
+
 # 分词函数（输入：分词前的评论文件，分词结果文件）
 def fenci(fileinpath, fileoutpath):
-    print("2.1 开始分词 ",end=" ,")
+    print("2.1 开始分词 ", end=" ,")
     agent_info_df = pd.read_csv(fileinpath)
     stopwords = stopwordslist(stopwords_in_path)
     final_result_df = pd.DataFrame()
@@ -57,7 +60,6 @@ def fenci(fileinpath, fileoutpath):
 
     save_as_csv(final_result_df, fileoutpath)
     print("分词完成，分词结果已保存至文件 %s " % fileoutpath)
-
 
 
 # 读取分词结果文件，统计所有词语的出现次数
@@ -93,6 +95,7 @@ def get_all_words(fileinpath):
     return result
 
 
+# 获取出现次数最高的前k个词语
 def get_top_k_words(result, degree_nums):
     # 前num个词语
     final_result = result[:(degree_nums)]
@@ -104,6 +107,7 @@ def get_top_k_words(result, degree_nums):
     return top_k_words_list
 
 
+# 将前K个词语写入文件，后从中筛选出常见的程度副词和直接分类词词典
 def get_degree_words(result, degree_nums):
     print("2.3 从出现次数最高的前 %d 个词语中产生常见的程度副词词典：" % degree_nums)
     # 根据分词结果获取到出现次数最高的前k个词语
@@ -112,10 +116,10 @@ def get_degree_words(result, degree_nums):
     file = open(top_250_word_path, "w")
     file.write("\n".join(top_n_word))
     file.close()
-    print("前 %s 个词语已写入文件 %s ，接下来请手动从中筛选出常见的程度副词并给定权值..." % (degree_nums, top_250_word_path))
+    print("前 %s 个词语已写入文件 %s ，接下来请手动从中筛选出直接分类词词典和常见的程度副词并给定权值..." % (degree_nums, top_250_word_path))
 
 
-"""获取中介-词语矩阵"""
+# 产生中介-词语矩阵
 def get_agent_juzhen(fileinpath, result, number):
     data = pd.read_csv(fileinpath)
     agent_id_list = list(set(data["agent_id"].tolist()))
@@ -131,7 +135,7 @@ def get_agent_juzhen(fileinpath, result, number):
         elif k_word in no_words:
             # print("%s在否定词中，需要删除..." % k_word)
             top_k_words_list.remove(k_word)
-    print("最终产生的{num}个词语为{words}".format(num=len(top_k_words_list),words=top_k_words_list))
+    print("最终产生的{num}个词语为{words}".format(num=len(top_k_words_list), words=top_k_words_list))
 
     all_agent_result = []
     for agent_id in agent_id_list:

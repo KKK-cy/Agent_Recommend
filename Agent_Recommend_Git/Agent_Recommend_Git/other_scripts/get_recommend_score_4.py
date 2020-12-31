@@ -103,6 +103,7 @@ def get_emotion_score(fileinpath, fileoutpath, w):
     save_as_csv(final_result_df, fileoutpath)
 
 # 多维度推荐得到recommend_score
+# 原始评分（w[0]） 评论文本情感得分平均值(w[1]) 服务年限(w[2]) 平均每年卖房数量(w[3]) 平均每年租房数量(w[4]) 30天内带看房次数(w[5]) 关注人数(w[6]) 平均标签占比(w[7])
 def get_recommend_score(chuli_agent_other_information, agent_id, star_score, emotion_score, w):
     # 获取其它的维度
     other_data = pd.read_csv(chuli_agent_other_information)
@@ -110,9 +111,9 @@ def get_recommend_score(chuli_agent_other_information, agent_id, star_score, emo
                                                    "rent_num_every_year", "kanfang_number_30_days", "followers_number", "avg_biaoqian_percent"])
     agent_df = other_data[other_data["agent_id"] == agent_id]
     agent_dict = agent_df.set_index("agent_id").to_dict("list")
-    score = w[0] * star_score + w[1] * emotion_score + w[2] / 6 * agent_dict["service_year"][0] + w[3] / 6 * agent_dict["sale_num_every_year"][
-        0] + w[4] / 6 * agent_dict["rent_num_every_year"][0] + w[5] / 6 * agent_dict["kanfang_number_30_days"][0] + w[6] / 6 * agent_dict["followers_number"][0] + \
-            w[7] / 6 * agent_dict["avg_biaoqian_percent"][0]
+    score = w[0] * star_score + w[1] * emotion_score + w[2] * agent_dict["service_year"][0] + w[3] * agent_dict["sale_num_every_year"][
+        0] + w[4] * agent_dict["rent_num_every_year"][0] + w[5] * agent_dict["kanfang_number_30_days"][0] + w[6] * agent_dict["followers_number"][0] + \
+            w[7] * agent_dict["avg_biaoqian_percent"][0]
     return score
 
 # 根据recommend_score排序形成首要推荐依据并存储

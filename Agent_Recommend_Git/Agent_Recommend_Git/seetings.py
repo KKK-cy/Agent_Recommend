@@ -33,7 +33,9 @@ agent_comments_table = "agent_comments"
 """ 处理后的其他信息存储表 """
 agent_other_info_table = "agent_other_information"
 # 存储中间结果的一些表
-zhongjian_recommend_score_table = "recommend_score"
+recommend_score_table = "recommend_score"
+# 次要推荐依据表
+recommend_second_table = "recommend_second"
 
 
 """一些文件存储路径"""
