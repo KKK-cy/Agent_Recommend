@@ -5,6 +5,7 @@
       <option name="ignoredIdentifiers">
         <list>
           <option value="Agent_Recommend_Git.seetings" />
+          <option value="Agent_Recommend_Git.Agent_Recommend_Git.views.recommend_app" />
         </list>
       </option>
     </inspection_tool>

@@ -1,15 +1,12 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from Agent_Recommend_Git.other_scripts.datasets_pretreatment_1 import comment_chuli, other_chuli, pre_result_to_database
-from Agent_Recommend_Git.other_scripts.get_degree_words_2 import fenci
-from Agent_Recommend_Git.other_scripts.agent_emotion_juzhen_5 import ronghe_juzhen, get_similar, get_k_neighbors
-from Agent_Recommend_Git.other_scripts.fenci_result_fenlei_3 import seg_result_emotionwords
-from Agent_Recommend_Git.other_scripts.get_recommend_score_4 import get_emotion_score, recom_first
-from Agent_Recommend_Git.other_scripts.recommend_way_6 import get_first_recom, get_second_recom, recommend
+
+from .other_scripts.get_recommend_score import GetRecommendScore
+from .other_scripts.recommend_way import RecommendWay
+from .other_scripts.get_emotion_juzhen import GetEmotionJuzhen
+from .common import Common
+from .database_settings import DatabaseSettings
 from recommend_app.models import Agents_other_info
-from Agent_Recommend_Git.seetings import w, fenci_result, fenci_result_fenlei, recommend_score, csv_to_database, \
-    database_name, recommend_score_table, recommend_first, recommend_second, get_engine, neighbors, \
-    agent_comments, chuli_agent_comments, agent_other_information, chuli_agent_other_information,recommend_second_table
 
 import warnings
 
@@ -29,6 +26,10 @@ def showwenjuan(request):
 
 # 调查问卷提交的数据 --> 转变为权重参数
 def wenjuan(request):
+    settings = Common()
+    database = DatabaseSettings()
+    engine = database.get_engine()
+
     # 获取买卖房屋还是租赁房屋
     answer1 = request.POST.get("question1")
     # 关注人数比较多的中介/累计评价比较多的中介
@@ -40,100 +41,82 @@ def wenjuan(request):
 
     # 根据用户的选择来调整权重矩阵
     if answer1 == "sale":
-        w[3] = 0.1
-        w[4] = 0
+        settings.w[3] = 0.1
+        settings.w[4] = 0
     elif answer1 == "rent":
-        w[4] = 0.1
-        w[3] = 0
+        settings.w[4] = 0.1
+        settings.w[3] = 0
     else:
-        w[3], w[4] = 0.05, 0.05
+        settings.w[3], settings.w[4] = 0.05, 0.05
 
     if answer2 == "follower":
-        w[6] = 0.1
-        w[2] = 0
+        settings.w[6] = 0.1
+        settings.w[2] = 0
     elif answer2 == "serviceyear":
-        w[2] = 0.1
-        w[6] = 0
+        settings.w[2] = 0.1
+        settings.w[6] = 0
     else:
-        w[2], w[6] = 0.05, 0.05
+        settings.w[2], settings.w[6] = 0.05, 0.05
 
     if answer3 == "30days":
-        w[5] = 0.1
-        w[7] = 0
+        settings.w[5] = 0.1
+        settings.w[7] = 0
     elif answer3 == "biaoqian":
-        w[7] = 0.1
-        w[5] = 0
+        settings.w[7] = 0.1
+        settings.w[5] = 0
     else:
-        w[5], w[7] = 0.05, 0.05
+        settings.w[5], settings.w[7] = 0.05, 0.05
 
-    print("根据您的选择，权重矩阵调整后为：%s，推荐的中介个数为：%s" % (w, answer4))
+    print("根据您的选择，权重矩阵调整后为：%s，推荐的中介个数为：%s" % (settings.w, answer4))
     print("""即：
     中介原始评分均值对应权重<{w0}>，评论文本情感得分均值对应权重<{w1}>,
     服务年限对应权重<{w2}>，买卖房屋数量对应权重<{w3}>，
     租赁房屋数量对应权重<{w4}>，30天内带看房次数对应权重<{w5}>，
     关注人数对应权重<{w6}>，标签平均占比对应权重<{w7}>
-    """.format(w0=w[0],w1=w[1],w2=w[2],w3=w[3],w4=w[4],w5=w[5],w6=w[6],w7=w[7]))
+    """.format(w0=settings.w[0], w1=settings.w[1], w2=settings.w[2], w3=settings.w[3], w4=settings.w[4],
+               w5=settings.w[5], w6=settings.w[6], w7=settings.w[7]))
 
     recommend_number = int(answer4)
-    recommend_second = "Agent_Recommend_Git/data/result/recommend_yiju/recommend_second.csv"
 
-    engine = get_engine(database_name)
+    print("1.根据权重{w}计算推荐总得分".format(w=settings.w))
+    get_recommend_score_tender = GetRecommendScore(settings,database)
+    get_recommend_score_tender.get_recommend_score(settings.final_result,settings.w,settings.recommend_score)
+    database.csv_to_database(engine,settings.recommend_score,database.database_name,database.recommend_score)
+    print("推荐总得分的计算结果已插入<{database_name}>库的<{table_name}>表".format(database_name=database.database_name,table_name=database.recommend_score))
+    get_recommend_score_tender.recom_first(settings.recommend_score,settings.recommend_first)
+    print("首要推荐依据已保存至<{recommend_first}>".format(recommend_first=settings.recommend_first))
+    # 首要推荐依据没有必要存至数据库中
+    # database.csv_to_database(engine,settings.recommend_first,database.database_name,database.recommend_first)
+    # print("首要推荐依据已插入<{database_name}>库的<{table_name}>表".format(database_name=database.database_name,table_name=database.recommend_first))
 
-    """ 
-        一些基本的处理工作（不用重复执行）：
-        1.对爬取到的评论文本进行预处理，另存为新文件并存入数据库
-        2.对预处理后的评论文本进行分词
-        3.对分词结果进行分类
-    """
-    # print(
-    #     "1.对爬取到的中介评论文件< {agent_comments} >和中介其它信息文件< {agent_other_information} >进行预处理，结果分别存至< {chuli_agent_comments} >和< {chuli_agent_other_information} >".format(
-    #         agent_comments=agent_comments, agent_other_information=agent_other_information,
-    #         chuli_agent_comments=chuli_agent_comments, chuli_agent_other_information=chuli_agent_other_information))
-    # comment_chuli(agent_comments, chuli_agent_comments)
-    # other_chuli(agent_other_information, chuli_agent_other_information)
-    # pre_result_to_database(engine)
-    #
-    # print("2.对预处理后的评论文件< {chuli_agent_comments} >进行分词，分词结果存至< {fenci_result} >".format(
-    #     chuli_agent_comments=chuli_agent_comments,
-    #     fenci_result=fenci_result))
-    # fenci(chuli_agent_comments, fenci_result)
-    #
-    # print("3.对分词结果进行分类，分类结果存至< {fenci_result_fenlei} >".format(fenci_result_fenlei=fenci_result_fenlei))
-    # seg_result_emotionwords(fenci_result, fenci_result_fenlei)
-
-    print("1.按照权重{w}融合评论情感得分值和其它维度信息计算 推荐总得分".format(w=w))
-    get_emotion_score(fenci_result_fenlei, recommend_score, w)
-    print("推荐总得分已写入文件< {recommend_score} >，即将写入数据库".format(recommend_score=recommend_score))
-    csv_to_database(engine, recommend_score, database_name, recommend_score_table)
-    print("按照推荐总得分排序形成首要推荐依据并写入文件<{recommend_first}>".format(recommend_first=recommend_first))
-    recom_first(recommend_score, recommend_first)
 
     print("2.融合中介-词语矩阵和推荐总得分形成中介-情感矩阵")
-    final_df = ronghe_juzhen()
+    emotion_juzhen_tender = GetEmotionJuzhen(settings, database)
+    final_df = emotion_juzhen_tender.ronghe_juzhen()
     print("根据中介-情感矩阵计算两两中介之间的相似度")
-    agent_list, similar_df = get_similar(final_df)
-    print("根据相似度的大小为每个中介保留{num}个邻居".format(num=neighbors))
-    neighbors_result = get_k_neighbors(agent_list, similar_df, neighbors)
-    neighbors_result.to_csv(recommend_second, index=False)
+    agent_list, similar_df = emotion_juzhen_tender.get_similar(final_df)
+    print("根据相似度的大小为每个中介保留{num}个邻居".format(num=settings.neighbors))
+    neighbors_result = emotion_juzhen_tender.get_k_neighbors(agent_list, similar_df, settings.neighbors)
+    neighbors_result.to_csv(settings.recommend_second, index=False)
     print(
-        "所有中介的{num}个邻居(即次要推荐依据)已写入文件< {recommend_second} >，即将写入数据库".format(num=neighbors, recommend_second=recommend_second))
-    csv_to_database(engine,recommend_second,database_name,recommend_second_table)
+        "所有中介的{num}个邻居(即次要推荐依据)已写入文件< {recommend_second} >，即将写入数据库".format(num=settings.neighbors,
+                                                                           recommend_second=settings.recommend_second))
+    database.csv_to_database(engine, settings.recommend_second, database.database_name, database.recommend_second_table)
 
 
-    print("6.根据首要推荐依据和次要推荐依据进行 %d 个中介的推荐" % recommend_number)
-    recommend_list = get_first_recom(recommend_first)
+    recommend_tender = RecommendWay(settings, database)
+    print("6.根据首要推荐依据和次要推荐依据进行{num}个中介的推荐".format(num=recommend_number))
+    recommend_list = recommend_tender.get_first_recom(settings.recommend_first)
     # print("4.1 获取到的首要推荐依据为：%s" % recommend_list)
-    recommend_second = get_second_recom(recommend_second)
+    recommend_second = recommend_tender.get_second_recom(settings.recommend_second)
     # print("4.2 获取到的次要推荐依据(邻居集)为：%s" % recommend_second)
-    final_result = recommend(recommend_list, recommend_second, recommend_number)
+    final_result = recommend_tender.recommend(recommend_list, recommend_second, recommend_number)
 
     # 根据产生的推荐列表去数据库拿到其信息
     agent_infos = []
     for agent in final_result:
         agent_info = Agents_other_info.objects.get(agent_id=agent)
         agent_infos.append(agent_info)
-
-    print(agent_infos)
 
     # 在控制台输出一下推荐的中介信息，便于在论文第4章截图
     print("推荐的{num}名中介的信息如下：".format(num=recommend_number))
@@ -153,8 +136,9 @@ def wenjuan(request):
 
     # 传入推荐中介信息，动态加载推荐结果页面
     return render(request, 'recommend_result.html',
-                  {"quanzhong": w, "agent_num": answer4, "recommend_list": agent_infos})
+                  {"quanzhong": settings.w, "agent_num": answer4, "recommend_list": agent_infos})
 
 
+# 推荐结果展示页面
 def recommend_result(request):
     return render(request, 'recommend_result.html')
