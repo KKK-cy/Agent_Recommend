@@ -15,9 +15,9 @@ class GetRecommendScore(object):
         self.settings = settings
         self.database = database
 
-    def get_recommend_score(self, fileinpath, w,fileoutpath):
+    def get_recommend_score(self, final_result_df,w):
         # 读取最终结果文件，产生df
-        agent_info_df = pd.read_csv(fileinpath)
+        agent_info_df = final_result_df
         agent_list = list(set(list(agent_info_df["agent_id"])))
         final_result_df = pd.DataFrame()
         for agent_id in tqdm(agent_list):
@@ -32,11 +32,13 @@ class GetRecommendScore(object):
 
         # 只保留中介ID、姓名、推荐总得分3列
         final_result_df = final_result_df[["agent_id","agent_name_x","recommend_score"]]
-        self.settings.save_as_csv(final_result_df, fileoutpath)
+        # 重命名某一列
+        final_result_df.rename(columns={"agent_name_x":"agent_name"},inplace=True)
+        return final_result_df
 
     # 根据recommend_score排序形成首要推荐依据并存储
-    def recom_first(self,fileinpath, fileoutpath):
-        data = pd.read_csv(fileinpath)
+    def recom_first(self,recommend_score_df, fileoutpath):
+        data = recommend_score_df
         recommend_df = pd.DataFrame(data, columns=["agent_id", "recommend_score"]).drop_duplicates()
         # 根据推荐得分排序形成首要推荐依据
         recommend_df_new = recommend_df.sort_values(by="recommend_score", ascending=False)

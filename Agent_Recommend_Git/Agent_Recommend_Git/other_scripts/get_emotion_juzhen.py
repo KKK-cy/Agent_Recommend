@@ -12,29 +12,29 @@ import pandas as pd
 import numpy as np
 from tqdm import tqdm
 
+
 class GetEmotionJuzhen(object):
-    def __init__(self,settings,database):
+    def __init__(self, settings, database):
         self.settings = settings
         self.database = database
 
     # 根据中介-词语矩阵 和 评论文本情感分值 产生  中介-情感矩阵
-    def ronghe_juzhen(self):
-        # 1.获取中介-词语矩阵
-        result = self.get_all_words(self.settings.fenci_result)
-        # print("3.1 开始获取中介 - 词语矩阵")
-        agent_df = self.get_agent_juzhen(self.settings.fenci_result, result, self.settings.top_k_words)
-        # 2.融合推荐总得分形成中介-情感矩阵
-        # print("3.2 开始拼接中介-情感矩阵")
-        data = pd.read_csv(self.settings.recommend_score)
-        recommend_df = pd.DataFrame(data, columns=["agent_id", "recommend_score"]).drop_duplicates()
+    def ronghe_juzhen(self, fenci_result_df, recommend_score_df):
+        # 获取所有词语的出现次数
+        result = self.get_all_words(fenci_result_df)
+        # 产生中介-词语矩阵
+        agent_df = self.get_agent_juzhen(fenci_result_df, result, self.settings.top_k_words)
+        # 产生中介-推荐总得分矩阵
+        recommend_df = recommend_score_df[["agent_id", "recommend_score"]]
+        # 拼接，需要修改两个df的列类型
+        recommend_df['agent_id'] = recommend_df['agent_id'].apply(int)
+        agent_df['agent_id'] = agent_df['agent_id'].apply(int)
         final_df = pd.merge(recommend_df, agent_df, on="agent_id")
-        # print("3.3 拼接后得到的中介-情感矩阵为：%s" % final_df)
         print("产生中介-情感矩阵成功！")
         return final_df
 
-
     # 根据中介-情感矩阵计算中介之间的相似度，并保留k个邻居
-    def get_similar(self,df):
+    def get_similar(self, df):
         agent_list = df["agent_id"].tolist()
         final_result = pd.DataFrame(index=agent_list, columns=agent_list)
         # print("3.4 根据 中介-情感矩阵 计算中介两两之间的相似度，花费时间可能较长，请耐心等候哦")
@@ -58,8 +58,7 @@ class GetEmotionJuzhen(object):
         print("中介相似度矩阵计算完毕")
         return agent_list, final_result
 
-
-    def get_k_neighbors(self,agent_list, df, neighbors):
+    def get_k_neighbors(self, agent_list, df, neighbors):
         # print("3.5 根据相似度高低获取中介的邻居集")
         result = []
         for agent_id in tqdm(agent_list):
@@ -84,9 +83,9 @@ class GetEmotionJuzhen(object):
         return result
 
     # 读取分词结果文件，统计所有词语的出现次数
-    def get_all_words(self,fileinpath):
+    def get_all_words(self, fenci_result_df):
         # print("2.2 开始统计所有词语的出现次数")
-        data = pd.read_csv(fileinpath)
+        data = fenci_result_df
 
         fenci_result_df = data["seg_comment_result"]
         comments_word_list = fenci_result_df.tolist()
@@ -116,8 +115,8 @@ class GetEmotionJuzhen(object):
         return result
 
     # 产生中介-词语矩阵
-    def get_agent_juzhen(self,fileinpath, result, number):
-        data = pd.read_csv(fileinpath)
+    def get_agent_juzhen(self, fenci_result_df, result, number):
+        data = fenci_result_df
         agent_id_list = list(set(data["agent_id"].tolist()))
 
         top_k_words_list = self.get_top_k_words(result, number)
@@ -129,7 +128,6 @@ class GetEmotionJuzhen(object):
                 # print("%s在程度副词中，需要删除..." % k_word)
                 top_k_words_list.remove(k_word)
             elif k_word in no_words:
-                # print("%s在否定词中，需要删除..." % k_word)
                 top_k_words_list.remove(k_word)
         print("最终产生的{num}个词语为{words}".format(num=len(top_k_words_list), words=top_k_words_list))
 
@@ -163,7 +161,7 @@ class GetEmotionJuzhen(object):
         return agent_df
 
     # 获取出现次数最高的前k个词语
-    def get_top_k_words(self,result, degree_nums):
+    def get_top_k_words(self, result, degree_nums):
         # 前num个词语
         final_result = result[:(degree_nums)]
         top_k_words = {}

@@ -12,16 +12,10 @@ import pandas as pd
 
 class Common(object):
     def __init__(self):
-        # 含8个指标的最终文件
-        self.final_result = "Agent_Recommend_Git/data/result/agent_full_info.csv"
-        # 分词结果，便于从中产生中介-词语矩阵
-        self.fenci_result = "Agent_Recommend_Git/data/result/comments_fenci.csv"
-        # 推荐总得分
-        self.recommend_score = "Agent_Recommend_Git/data/result/recommend_score.csv"
         # 首要推荐依据
-        self.recommend_first = "Agent_Recommend_Git/data/result/recommend_yiju/recommend_first.txt"
+        self.recommend_first = "Agent_Recommend_Git/data/result/recommend_first.txt"
         # 次要推荐依据
-        self.recommend_second = "Agent_Recommend_Git/data/result/recommend_yiju/recommend_second.csv"
+        self.recommend_second = "Agent_Recommend_Git/data/result/recommend_second.csv"
 
         # 产生中介-词语矩阵的出现次数最高的前10个词
         self.top_k_words = 12
