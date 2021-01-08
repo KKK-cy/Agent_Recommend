@@ -1,18 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3bcc9e17-ed5f-4344-8ba3-5ea77a7d28b8" name="Default Changelist" comment="将数据爬取、预处理、计算评论文本情感得分值、入库等操作剥离，直接使用情感分析的结果进行评分扩展和推荐">
+    <list default="true" id="3bcc9e17-ed5f-4344-8ba3-5ea77a7d28b8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/css/album.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/css/bootstrap-grid.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/css/bootstrap-grid.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/css/bootstrap-grid.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/css/bootstrap-grid.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/css/bootstrap-reboot.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/css/bootstrap-reboot.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/css/bootstrap-reboot.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/css/bootstrap-reboot.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/css/bootstrap.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/css/bootstrap.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/css/bootstrap.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/bootstrap-themes.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/bootstrap-themes@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/album.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/album@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/blog.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/blog@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/carousel.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/carousel@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/checkout.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/checkout@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/cover.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/cover@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/dashboard.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/dashboard@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/floating-labels.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/floating-labels@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/grid.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/grid@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/jumbotron.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/jumbotron@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/navbar-bottom.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/navbar-bottom@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/navbar-fixed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/navbar-fixed@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/navbar-static.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/navbar-static@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/navbars.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/navbars@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/offcanvas.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/offcanvas@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/pricing.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/pricing@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/product.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/product@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/sign-in.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/sign-in@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/starter-template.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/starter-template@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/sticky-footer-navbar.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/sticky-footer-navbar@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/sticky-footer.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/examples/sticky-footer@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/favicons/android-chrome-192x192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/favicons/android-chrome-512x512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/favicons/apple-touch-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/favicons/browserconfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/favicons/favicon-16x16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/favicons/favicon-32x32.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/favicons/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/favicons/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/favicons/mstile-144x144.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/favicons/mstile-150x150.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/favicons/mstile-310x150.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/favicons/mstile-310x310.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/favicons/mstile-70x70.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/img/favicons/safari-pinned-tab.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/js/bootstrap.bundle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/js/bootstrap.bundle.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/js/bootstrap.bundle.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/js/bootstrap.bundle.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/js/bootstrap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/js/bootstrap.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/js/bootstrap.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Agent_Recommend_Git/static/json/manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/common.py" beforeDir="false" afterPath="$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/common.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/data/result/agent_full_info.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/data/result/comments_fenci.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/data/result/recommend_score.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/data/result/recommend_yiju/recommend_first.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/data/result/recommend_yiju/recommend_second.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/database_settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/database_settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/other_scripts/get_emotion_juzhen.py" beforeDir="false" afterPath="$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/other_scripts/get_emotion_juzhen.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/other_scripts/get_recommend_score.py" beforeDir="false" afterPath="$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/other_scripts/get_recommend_score.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/data/result/recommend_second.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/data/result/recommend_second.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agent_Recommend_Git/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/Agent_Recommend_Git/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agent_Recommend_Git/templates/recommend_result.html" beforeDir="false" afterPath="$PROJECT_DIR$/Agent_Recommend_Git/templates/recommend_result.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -44,10 +116,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="117" column="20" lean-forward="true" selection-start-line="117" selection-start-column="20" selection-end-line="117" selection-end-column="20" />
+            <state relative-caret-position="146">
+              <caret line="22" selection-start-line="22" selection-end-line="22" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
+                <element signature="e#788#5947#0" />
               </folding>
             </state>
           </provider>
@@ -70,7 +143,7 @@
         <entry file="file://$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/common.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="51">
-              <caret line="14" column="16" lean-forward="true" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
+              <caret line="14" column="16" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
               <folding>
                 <element signature="e#125#134#0" expanded="true" />
               </folding>
@@ -81,8 +154,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/other_scripts/get_emotion_juzhen.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="66">
-              <caret line="25" column="86" lean-forward="true" selection-start-line="25" selection-start-column="86" selection-end-line="25" selection-end-column="86" />
+            <state relative-caret-position="51">
+              <caret line="3" column="29" lean-forward="true" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
               <folding>
                 <element signature="e#185#204#0" expanded="true" />
               </folding>
@@ -94,7 +167,7 @@
         <entry file="file://$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/other_scripts/get_recommend_score.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="237">
-              <caret line="38" column="33" lean-forward="true" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="33" />
+              <caret line="38" column="33" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -138,15 +211,20 @@
         <option value="$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/other_scripts/get_recommend_score.py" />
         <option value="$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/database_settings.py" />
         <option value="$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/common.py" />
-        <option value="$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/views.py" />
         <option value="$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/other_scripts/get_emotion_juzhen.py" />
+        <option value="$PROJECT_DIR$/Agent_Recommend_Git/templates/css/bootstrap.min.css" />
+        <option value="$PROJECT_DIR$/Agent_Recommend_Git/templates/home1.html" />
+        <option value="$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/views.py" />
+        <option value="$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/settings.py" />
+        <option value="$PROJECT_DIR$/Agent_Recommend_Git/templates/home.html" />
+        <option value="$PROJECT_DIR$/Agent_Recommend_Git/templates/recommend_result.html" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="675" />
-    <option name="y" value="32" />
-    <option name="width" value="699" />
+    <option name="x" value="245" />
+    <option name="y" value="68" />
+    <option name="width" value="1288" />
     <option name="height" value="744" />
   </component>
   <component name="ProjectLevelVcsManager">
@@ -187,14 +265,6 @@
               <item name="Agent_Recommend" type="b2602c69:ProjectViewProjectNode" />
               <item name="Agent_Recommend" type="462c0819:PsiDirectoryNode" />
               <item name="Agent_Recommend_Git" type="462c0819:PsiDirectoryNode" />
-              <item name="Agent_Recommend_Git" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="result" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Agent_Recommend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Agent_Recommend" type="462c0819:PsiDirectoryNode" />
-              <item name="Agent_Recommend_Git" type="462c0819:PsiDirectoryNode" />
               <item name="recommend_app" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -212,17 +282,22 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/data/result" />
+    <property name="editor.config.ad.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Agent_Recommend_Git/static" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Git\Agent_Recommend\Agent_Recommend_Git\static\css" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\Git\Agent_Recommend\Agent_Recommend_Git\static" />
+      <recent name="F:\Git\Agent_Recommend\Agent_Recommend_Git\static\json" />
+      <recent name="F:\Git\Agent_Recommend\Agent_Recommend_Git\static\css" />
       <recent name="F:\Git\Agent_Recommend\Agent_Recommend_Git\Agent_Recommend_Git\data\result" />
       <recent name="F:\Git\Agent_Recommend\Agent_Recommend_Git\Agent_Recommend_Git\agent_infors" />
-      <recent name="F:\Git\Agent_Recommend\Agent_Recommend_Git\Agent_Recommend_Git\pachong_scripts" />
-      <recent name="F:\Git\Agent_Recommend\Agent_Recommend_Git\Agent_Recommend_Git\other_scripts" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -282,7 +357,7 @@
       <workItem from="1609312145425" duration="20861000" />
       <workItem from="1609745779968" duration="1891000" />
       <workItem from="1609921366110" duration="20572000" />
-      <workItem from="1610073555532" duration="7995000" />
+      <workItem from="1610073555532" duration="16745000" />
     </task>
     <task id="LOCAL-00001" summary="找回来了我的Django项目！">
       <created>1609313067645</created>
@@ -312,17 +387,24 @@
       <option name="project" value="LOCAL" />
       <updated>1610011173925</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="不用在本地存储文件，可以直接提取数据库中的数据进行操作">
+      <created>1610094750451</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1610094750451</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51849000" />
+    <option name="totallyTimeSpent" value="60599000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="32" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23524962" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16414523" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -342,7 +424,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="right" id="Database" order="4" weight="0.32980332" />
+      <window_info anchor="right" id="Database" order="4" weight="0.329718" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -353,7 +435,8 @@
     <MESSAGE value="规范了原来的脚本，添加了一些可视化的输出语句" />
     <MESSAGE value="控制台输出推荐的中介的详细信息，便于在论文第3-4章截图" />
     <MESSAGE value="将数据爬取、预处理、计算评论文本情感得分值、入库等操作剥离，直接使用情感分析的结果进行评分扩展和推荐" />
-    <option name="LAST_COMMIT_MESSAGE" value="将数据爬取、预处理、计算评论文本情感得分值、入库等操作剥离，直接使用情感分析的结果进行评分扩展和推荐" />
+    <MESSAGE value="不用在本地存储文件，可以直接提取数据库中的数据进行操作" />
+    <option name="LAST_COMMIT_MESSAGE" value="不用在本地存储文件，可以直接提取数据库中的数据进行操作" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Agent_Recommend$get_agent_comments.coverage" NAME="get_agent_comments Coverage Results" MODIFIED="1609923243514" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/pachong_scripts" />
@@ -395,9 +478,6 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/data/result/emotion_degree_no_words.csv" />
-    <entry file="file://$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/settings.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/data/result/recommend_yiju/recommend_second.csv">
       <provider selected="true" editor-type-id="csv-text-editor">
         <state>
@@ -429,13 +509,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/pachong_scripts/get_agent_other_infor.py" />
     <entry file="file://$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/pachong_scripts/get_agent_comments.py" />
-    <entry file="file://$PROJECT_DIR$/Agent_Recommend_Git/templates/recommend_result.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="28" column="57" selection-start-line="28" selection-start-column="48" selection-end-line="28" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/agent_infors/chuli_AgentOtherInfor.csv">
       <provider selected="true" editor-type-id="csv-text-editor" />
       <provider editor-type-id="csv-table-editor">
@@ -476,13 +549,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/data/result/emotion_score.csv" />
-    <entry file="file://$PROJECT_DIR$/Agent_Recommend_Git/templates/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="101" column="38" selection-start-line="101" selection-start-column="38" selection-end-line="101" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -531,7 +597,7 @@
     <entry file="file://$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/other_scripts/get_recommend_score.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="237">
-          <caret line="38" column="33" lean-forward="true" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="33" />
+          <caret line="38" column="33" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="33" />
         </state>
       </provider>
     </entry>
@@ -545,7 +611,7 @@
     <entry file="file://$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/common.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
-          <caret line="14" column="16" lean-forward="true" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
+          <caret line="14" column="16" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
           <folding>
             <element signature="e#125#134#0" expanded="true" />
           </folding>
@@ -563,20 +629,91 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/data/result/recommend_second.csv">
+      <provider selected="true" editor-type-id="csv-text-editor" />
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Agent_Recommend_Git/templates/css/bootstrap.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="505">
+          <caret line="6" column="45" selection-start-line="6" selection-start-column="45" selection-end-line="6" selection-end-column="45" />
+          <folding>
+            <element signature="e#28369#28624#2" expanded="true" />
+            <element signature="e#29221#29395#1" expanded="true" />
+            <element signature="e#29435#29690#1" expanded="true" />
+            <element signature="e#32008#32322#2" expanded="true" />
+            <element signature="e#32931#33105#1" expanded="true" />
+            <element signature="e#33145#33459#1" expanded="true" />
+            <element signature="e#62432#62640#2" expanded="true" />
+            <element signature="e#62869#63026#2" expanded="true" />
+            <element signature="e#63429#63585#2" expanded="true" />
+            <element signature="e#65072#65246#1" expanded="true" />
+            <element signature="e#79062#79315#2" expanded="true" />
+            <element signature="e#80182#80441#2" expanded="true" />
+            <element signature="e#110420#110616#2" expanded="true" />
+            <element signature="e#110662#110859#2" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Agent_Recommend_Git/templates/home1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="82">
+          <caret line="229" column="14" lean-forward="true" selection-start-line="229" selection-start-column="14" selection-end-line="229" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="117" column="20" lean-forward="true" selection-start-line="117" selection-start-column="20" selection-end-line="117" selection-end-column="20" />
+        <state relative-caret-position="146">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
+            <element signature="e#788#5947#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="123" column="29" selection-start-line="123" selection-start-column="29" selection-end-line="123" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Agent_Recommend_Git/static/css/bootstrap.min.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Agent_Recommend_Git/static/css/bootstrap.min.css.map">
+      <provider editor-type-id="sourcemapFileViewerProvider" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Agent_Recommend_Git/templates/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="354">
+          <caret line="43" column="58" lean-forward="true" selection-start-line="3" selection-start-column="4" selection-end-line="43" selection-end-column="58" />
+          <folding>
+            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Agent_Recommend_Git/templates/recommend_result.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="48" lean-forward="true" selection-start-line="19" selection-start-column="48" selection-end-line="19" selection-end-column="48" />
+          <folding>
+            <element signature="n#style#0;n#head#0;n#!!top" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Agent_Recommend_Git/Agent_Recommend_Git/other_scripts/get_emotion_juzhen.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="25" column="86" lean-forward="true" selection-start-line="25" selection-start-column="86" selection-end-line="25" selection-end-column="86" />
+        <state relative-caret-position="51">
+          <caret line="3" column="29" lean-forward="true" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
           <folding>
             <element signature="e#185#204#0" expanded="true" />
           </folding>
