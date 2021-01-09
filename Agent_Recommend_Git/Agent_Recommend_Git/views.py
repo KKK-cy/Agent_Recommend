@@ -96,8 +96,8 @@ def wenjuan(request):
     print("----------------------- 2.产生中介-情感矩阵 ---------------------------")
     emotion_juzhen_tender = GetEmotionJuzhen(settings, database)
     # 从数据库中获取到分词结果df，便于从中产生中介-词语矩阵
-    fenci_result_df = database.get_agent_info(engine,database.fenci_result_table)
-    final_df = emotion_juzhen_tender.ronghe_juzhen(fenci_result_df,recommend_score_df)
+    fenci_result_fenlei_df = database.get_agent_info(engine,database.fenci_result_fenlei_table)
+    final_df = emotion_juzhen_tender.ronghe_juzhen(fenci_result_fenlei_df,recommend_score_df)
 
     print("----------------------- 3.计算相似度并保留邻居集 ---------------------------")
     print("根据中介-情感矩阵计算两两中介之间的相似度")

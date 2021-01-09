@@ -21,8 +21,8 @@ class DatabaseSettings(object):
         # 含8个指标数据的结果表
         self.final_result_table = "final_result"
 
-        # 分词结果表
-        self.fenci_result_table = "fenci_result"
+        # 分词结果分类表
+        self.fenci_result_fenlei_table = "fenci_result_fenlei"
 
         # 推荐总得分表
         self.recommend_score = "recommend_score"
