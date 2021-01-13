@@ -24,6 +24,7 @@ class GetEmotionJuzhen(object):
         result = self.get_all_words(fenci_result_df)
         # 产生中介-词语矩阵
         agent_df = self.get_agent_juzhen(fenci_result_df, result, self.settings.top_k_words)
+
         # 产生中介-推荐总得分矩阵
         recommend_df = recommend_score_df[["agent_id", "recommend_score"]]
         # 拼接，需要修改两个df的列类型
@@ -31,6 +32,14 @@ class GetEmotionJuzhen(object):
         agent_df['agent_id'] = agent_df['agent_id'].apply(int)
         final_df = pd.merge(recommend_df, agent_df, on="agent_id")
         print("产生中介-情感矩阵成功！")
+
+        # 将产生的中介-词语矩阵 和 中介-情感矩阵保存一下，便于论文截图
+        print("将中介-词语矩阵和中介-情感矩阵存至xlsx文件，便于论文截图")
+        writer = pd.ExcelWriter("agent_juzhen.xlsx")
+        agent_df.to_excel(writer, sheet_name="agent_ciyu")
+        final_df.to_excel(writer, sheet_name="agent_qinggan")
+        writer.save()
+
         return final_df
 
     # 根据中介-情感矩阵计算中介之间的相似度，并保留k个邻居
