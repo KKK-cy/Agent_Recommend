@@ -34,4 +34,8 @@ urlpatterns = [
     url(r'^home.html', views.home),
     re_path('wenjuan/$', views.showwenjuan),
     re_path('recommend_result$', views.wenjuan),
+    # 情感分析相关页面
+    re_path('emotion/$', views.showemotion),
+    re_path('hotwords/$', views.showhotwords),
+    re_path('visual/$', views.showvisual)
 ]

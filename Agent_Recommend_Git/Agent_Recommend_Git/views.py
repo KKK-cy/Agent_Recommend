@@ -6,7 +6,7 @@ from .other_scripts.recommend_way import RecommendWay
 from .other_scripts.get_emotion_juzhen import GetEmotionJuzhen
 from .common import Common
 from .database_settings import DatabaseSettings
-from recommend_app.models import Agents_other_info, User
+from recommend_app.models import Agents_other_info, User,Agent_scores
 from .forms import UserForm, RegisterForm
 import warnings
 import pandas as pd
@@ -89,7 +89,7 @@ def logout(request):
 
 # 系统主页，显示24名中介的名片卡信息
 def home(request):
-    agent_infos = Agents_other_info.objects.all()[:24]
+    agent_infos = Agents_other_info.objects.all()[:30]
     return render(request, 'home.html', {'agent_infos': agent_infos})
 
 
@@ -97,6 +97,18 @@ def home(request):
 def showwenjuan(request):
     return render(request, 'wenjuan.html',)
 
+# 情感分析结果展示页面
+def showemotion(request):
+    agent_score_infos = Agent_scores.objects.all()[:30]
+    return render(request, 'emotion.html',{'agent_score_infos': agent_score_infos})
+
+# 热词展示页面
+def showhotwords(request):
+    return render(request, 'hotwords.html',)
+
+# 评论热词可视化展示页面
+def showvisual(request):
+    return render(request, 'visual.html',)
 
 # 调查问卷提交的数据 --> 转变为权重参数
 def wenjuan(request):

@@ -64,3 +64,14 @@ class User(models.Model):
         ordering = ['c_time']
         verbose_name = '用户'
         verbose_name_plural = '用户'
+
+
+class Agent_scores(models.Model):
+    agent_id = models.IntegerField(default='中介ID')
+    agent_name = models.CharField(default='中介姓名', max_length=60)
+    agent_img = models.CharField(default='中介图片', max_length=60)
+    agent_url = models.CharField(default='中介个人主页', max_length=100)
+    # 原始评分均值
+    original_avg_score = models.FloatField(default='原始评分均值')
+    # 评论文本情感得分值均值
+    emotion_avg_score = models.FloatField(default='评论文本情感得分均值')
