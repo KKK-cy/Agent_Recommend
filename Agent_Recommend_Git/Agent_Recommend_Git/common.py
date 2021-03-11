@@ -30,6 +30,9 @@ class Common(object):
         self.no_in_path = "Agent_Recommend_Git/data/cidian/no_words.txt"
         self.degree_in_path = "Agent_Recommend_Git/data/cidian/degree_word.xlsx"
 
+        # 词云文件保存位置
+        self.ciyun_file = "Agent_Recommend_Git/img/hotwords_ciyun.jpg"
+
     # 一些公用函数
     def save_as_csv(self,df, fileoutpath):
         if os.path.exists(fileoutpath):

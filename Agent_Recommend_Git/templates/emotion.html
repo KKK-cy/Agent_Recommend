@@ -39,28 +39,6 @@
                 font-size: 3.5rem;
             }
         }
-
-        .graph {
-            position: relative; /* IE is dumb */
-            width: 200px;
-            border: 1px solid #B1D632;
-            padding: 2px;
-        }
-
-        .graph .bar {
-            display: block;
-            position: relative;
-            background: #B1D632;
-            text-align: center;
-            color: #333;
-            height: 2em;
-            line-height: 2em;
-        }
-
-        .graph .bar span {
-            position: absolute;
-            left: 1em;
-        }
     </style>
     <!-- Custom styles for this template -->
     <link href="../static/css/album.css" rel="stylesheet">
@@ -89,10 +67,10 @@
     <section class="jumbotron text-center" style="height: 200px;padding-top: 0rem;padding-bottom: 0rem">
         <div class="container" style="margin-top: 0">
             <h1>欢迎查看本系统对中介评论文本进行情感分析后的结果</h1>
-            <p class="lead text-muted">以下为本系统计算后得到的每名房产中介原始评分均值和评论文本情感得分均值：</p>
+            <p class="lead text-muted">以下为本系统计算后得到的每名房产中介原始评分均值和评论文本情感得分均值，仅供您选择时进行参考：</p>
             <p>
-                <a href="hotwords" class="btn btn-primary my-2">查看评论热词</a>
-                <a href="visual" class="btn btn-primary my-2">查看中介评论热词可视化</a>
+                <a href="hotwords" class="btn btn-primary my-2">查看热词词云</a>
+                <a href="visual" class="btn btn-primary my-2">中介评论热词统计</a>
                 <a href=".." class="btn btn-primary my-2" style="margin-bottom: 0rem">返回推荐系统首页</a>
             </p>
         </div>
@@ -109,9 +87,9 @@
                         <div class="card-body">
                             <h5 class="card-title"><b style="color: red">{{ agent_info.agent_name }}</b></h5>
 
-                            <h7>原始评分均值：<b>{{ agent_info.original_avg_score }}</b>分</h7>
+                            <h7>原始评分均值：<b style="color: red">{{ agent_info.original_avg_score }}</b>&nbsp分</h7>
                             </br>
-                            <h7>评论情感得分均值：<b>{{ agent_info.emotion_avg_score }}</b>分</h7>
+                            <h7>评论情感得分均值：<b style="color: red">{{ agent_info.emotion_avg_score }}</b>&nbsp分</h7>
                             </br>
                             <a href="{{ agent_info.agent_url }}" target="-blank"
                                class="btn btn-primary">访问{{ agent_info.agent_name }}的主页</a>

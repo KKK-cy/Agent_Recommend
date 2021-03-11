@@ -1,15 +1,18 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
+from .other_scripts.hotwords_visual import HotwordsVisual
 from .other_scripts.get_recommend_score import GetRecommendScore
 from .other_scripts.recommend_way import RecommendWay
 from .other_scripts.get_emotion_juzhen import GetEmotionJuzhen
 from .common import Common
 from .database_settings import DatabaseSettings
-from recommend_app.models import Agents_other_info, User,Agent_scores
+from recommend_app.models import Agents_other_info, User,Agent_scores,Agent_emotion_juzhen
 from .forms import UserForm, RegisterForm
 import warnings
 import pandas as pd
+from wordcloud import WordCloud
+import matplotlib.pyplot as plt
 
 warnings.filterwarnings("ignore")
 
@@ -104,11 +107,35 @@ def showemotion(request):
 
 # 热词展示页面
 def showhotwords(request):
-    return render(request, 'hotwords.html',)
+    settings = Common()
+    database = DatabaseSettings()
+    engine = database.get_engine()
+
+    hotwords_tender = HotwordsVisual(settings, database)
+    fenci_result_fenlei_df = database.get_agent_info(engine, database.fenci_result_fenlei_table)
+    # 热词词典{热词：出现次数}
+    hotwords_dict = hotwords_tender.hotwords_ciyun(fenci_result_df=fenci_result_fenlei_df)
+    print("1.热门词语的出现次数字典为：",hotwords_dict)
+    # 根据所有词语的出现次数产生词云文件
+    print("2.开始根据热门词语字典生成< 热词词云图 >")
+    wc1 = WordCloud(font_path='/font/msyh.ttc', background_color='white').generate_from_frequencies(hotwords_dict)
+    fig = plt.figure(num="中介评论情感分析与协同过滤推荐系统--热词词云")
+    plt.imshow(wc1)
+    plt.axis('off')
+    plt.show()
+
+    plt.savefig(settings.ciyun_file, dpi=500)
+    print("3.生成的热词词云图已保存至本地{ciyun_file}".format(ciyun_file=settings.ciyun_file))
+
+    # 后面考虑指定词云的形状
+
+    return render(request, 'hotwords.html',{'img_file':settings.ciyun_file})
 
 # 评论热词可视化展示页面
 def showvisual(request):
-    return render(request, 'visual.html',)
+    # 调用表agent_emotion_juzhen中的数据渲染页面
+    agent_infos = Agent_emotion_juzhen.objects.all()[:30]
+    return render(request, 'visual.html',{'agent_infos': agent_infos})
 
 # 调查问卷提交的数据 --> 转变为权重参数
 def wenjuan(request):

@@ -75,3 +75,22 @@ class Agent_scores(models.Model):
     original_avg_score = models.FloatField(default='原始评分均值')
     # 评论文本情感得分值均值
     emotion_avg_score = models.FloatField(default='评论文本情感得分均值')
+
+# 中介-情感矩阵表
+class Agent_emotion_juzhen(models.Model):
+    agent_id = models.IntegerField(default='中介ID')
+    agent_name = models.CharField(default='中介姓名', max_length=60)
+    agent_img = models.CharField(default='中介图片', max_length=60)
+    agent_url = models.CharField(default='中介个人主页', max_length=100)
+
+    zhuanye = models.FloatField(default='专业')
+    jingjiren = models.FloatField(default='经纪人')
+    fuwu = models.FloatField(default='服务')
+    fangzi = models.FloatField(default='房子')
+    reqing = models.FloatField(default='热情')
+    yewu = models.FloatField(default='业务')
+    bucuo = models.FloatField(default='不错')
+    kaopu = models.FloatField(default='靠谱')
+    kanfang = models.FloatField(default='看房')
+    fangyuan = models.FloatField(default='房源')
+    recommend_score = models.CharField(default='推荐总得分', max_length=100)
